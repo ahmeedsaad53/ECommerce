@@ -1,18 +1,20 @@
-using E_Commerce_Api.Date;
+using E_Commerce.Date;
+using ECommerce.Controller;
+using ECommerce.Date;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
-using ECommerce.Controller;
 
 namespace WebApi
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -46,20 +48,38 @@ namespace WebApi
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var authorizationHeader = context.Request.Headers["Authorization"].ToString();
+                        const string doubleBearerPrefix = "Bearer Bearer ";
+
+                        if (authorizationHeader.StartsWith(doubleBearerPrefix, StringComparison.OrdinalIgnoreCase))
+                        {
+                            context.Token = authorizationHeader[doubleBearerPrefix.Length..].Trim();
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
 
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
+                    ValidIssuer = "http://localhost:5009",
+                    ValidAudience = "http://localhost:5009",
 
-                    ValidIssuer = "http://localhost:5097",
-                    ValidAudience = "http://localhost:5097",
 
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes("sgdsgd648d9f*/w43U4354t69ts8e22365fh")
-                    )
+                    ),
+
+                   RoleClaimType = ClaimTypes.Role 
+
                 };
             });
 
@@ -77,7 +97,7 @@ namespace WebApi
                 // JWT Swagger Auth
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Enter JWT Token",
+                    Description = "Paste the JWT token only. Swagger adds the Bearer prefix automatically.",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
@@ -124,12 +144,15 @@ namespace WebApi
         
 
 
-            app.UseHttpsRedirection();
+          //  app.UseHttpsRedirection();
 
             // Static Files
             app.UseStaticFiles();
 
-            // Cors
+
+
+            
+
 
 
             // Authentication
@@ -137,6 +160,11 @@ namespace WebApi
 
             app.UseAuthorization();
             app.MapControllers();
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                await DbInitializer.SeedRoles(services);
+            }
             app.Run();
         }
     }

@@ -86,6 +86,22 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Mvc.Core/2.3.10": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyModel": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "type": "package",
         "compile": {
@@ -1254,6 +1270,19 @@
         "lib/net10.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
         "microsoft.aspnetcore.identity.entityframeworkcore.10.0.8.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Mvc.Core/2.3.10": {
+      "sha512": "I+ZEY2WqKnyGbsQ+0INQ3BqPuO2LAq89fYSH679liqY92cdyO5rXs3InkyPVjckAuhvLsBs2N9v8V0M0oAP8eA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.mvc.core/2.3.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Core.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Core.xml",
+        "microsoft.aspnetcore.mvc.core.2.3.10.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.core.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
@@ -3584,6 +3613,7 @@
     "net10.0": [
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.8",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 10.0.8",
+      "Microsoft.AspNetCore.Mvc.Core >= 2.3.10",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 10.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 10.0.8",
@@ -3649,6 +3679,10 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
             "version": "[10.0.8, )"
+          },
+          "Microsoft.AspNetCore.Mvc.Core": {
+            "target": "Package",
+            "version": "[2.3.10, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "suppressParent": "All",
@@ -4106,5 +4140,17 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "PackageReference Microsoft.AspNetCore.Mvc.Core will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
+      "libraryId": "Microsoft.AspNetCore.Mvc.Core",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

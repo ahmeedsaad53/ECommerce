@@ -1,4 +1,4 @@
-﻿namespace E_Commerce_Api.Date
+﻿namespace E_Commerce.Date
 {
     public class Payment
     {

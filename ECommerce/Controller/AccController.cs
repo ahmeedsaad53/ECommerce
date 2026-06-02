@@ -1,4 +1,4 @@
-﻿using E_Commerce_Api.Date;
+﻿using E_Commerce.Date;
 using ECommerce.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +35,9 @@ namespace ECommerce.Controller
                 user.Email = UserFromRequest.Email;
                 user.UserName = UserFromRequest.UserName;
                 IdentityResult result = await _UserManager.CreateAsync(user, UserFromRequest.Password);
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
+                    await _UserManager.AddToRoleAsync(user, "User");
                     return Ok("User Created");
                 }
                 else
@@ -69,8 +71,8 @@ namespace ECommerce.Controller
                 userClaim.Add(new Claim(ClaimTypes.Role, role));
             }
             JwtSecurityToken token = new JwtSecurityToken(
-                issuer: "http://localhost:5097",
-                audience: "http://localhost:5097",
+               issuer: "http://localhost:5009",
+               audience: "http://localhost:5009",
                 claims: userClaim,
                 expires: DateTime.Now.AddDays(7),
                 signingCredentials: signingCredentials

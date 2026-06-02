@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZwTkfglVo8o=",
+  "dgSpecHash": "sxFeOQrXMvo=",
   "success": true,
   "projectFilePath": "C:\\Users\\berlin\\Desktop\\ECommerce\\ECommerce\\ECommerce.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\berlin\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\berlin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.8\\microsoft.aspnetcore.authentication.jwtbearer.10.0.8.nupkg.sha512",
     "C:\\Users\\berlin\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\10.0.8\\microsoft.aspnetcore.identity.entityframeworkcore.10.0.8.nupkg.sha512",
+    "C:\\Users\\berlin\\.nuget\\packages\\microsoft.aspnetcore.mvc.core\\2.3.10\\microsoft.aspnetcore.mvc.core.2.3.10.nupkg.sha512",
     "C:\\Users\\berlin\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
     "C:\\Users\\berlin\\.nuget\\packages\\microsoft.bcl.cryptography\\9.0.4\\microsoft.bcl.cryptography.9.0.4.nupkg.sha512",
     "C:\\Users\\berlin\\.nuget\\packages\\microsoft.build.framework\\18.0.2\\microsoft.build.framework.18.0.2.nupkg.sha512",
@@ -60,5 +61,18 @@
     "C:\\Users\\berlin\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.4\\system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "C:\\Users\\berlin\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.4\\system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference Microsoft.AspNetCore.Mvc.Core will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
+      "projectPath": "C:\\Users\\berlin\\Desktop\\ECommerce\\ECommerce\\ECommerce.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\berlin\\Desktop\\ECommerce\\ECommerce\\ECommerce.csproj",
+      "libraryId": "Microsoft.AspNetCore.Mvc.Core",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

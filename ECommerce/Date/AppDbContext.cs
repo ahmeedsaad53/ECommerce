@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace E_Commerce_Api.Date
+namespace E_Commerce.Date
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -30,6 +30,7 @@ namespace E_Commerce_Api.Date
             builder.Entity<Order>().HasMany(o => o.OrderItems).WithOne(oi => oi.Order).HasForeignKey(oi => oi.OrderId);
             builder.Entity<Category>().HasMany(c => c.Products).WithOne(p => p.Category).HasForeignKey(p => p.CategoryId);
             builder.Entity<Product>().Property(p => p.Price).HasColumnType("decimal(18,2)");
+            builder.Entity<Order>().Property(o => o.TotalAmount).HasColumnType("decimal(18,2)");
             builder.Entity<CartItem>().Property(ci => ci.Price).HasColumnType("decimal(18,2)");
             builder.Entity<OrderItem>().Property(oi => oi.Price).HasColumnType("decimal(18,2)");
             builder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
@@ -47,6 +48,7 @@ namespace E_Commerce_Api.Date
 
         public List<Payment> Payments { get; set; }
     }
+
 
 
 }
